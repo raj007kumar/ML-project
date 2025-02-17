@@ -4,6 +4,8 @@ from src.exception import customException
 
 from src.logger import logging
 
+from src.components.data_transformation import datatransformation
+from src.components.data_transformation import data_transformationconfig
 
 
 import pandas as pd
@@ -45,7 +47,15 @@ class data_ingestion:
         except Exception as e:
             raise customException(e,sys)
         
-if __name__=="__main__":
-    config = data_ingestion_config()  # Create an instance of the config class
-    obj = data_ingestion(config)  # Pass it to the dataingestion class
-    obj.initiate_data_ingestion()
+if __name__ == "__main__":
+    config_ingestion = data_ingestion_config()  # Data ingestion config instance
+    obj_ingestion = data_ingestion(config_ingestion)  
+    train_data, test_data = obj_ingestion.initiate_data_ingestion()
+    
+    config_transformation = data_transformationconfig()  # Fix: Create transformation config instance
+    data_transformation = datatransformation(config_transformation)  # Fix: Pass the correct config
+
+    train_arr, test_arr, _ = data_transformation.initiate_data_transformation(train_data, test_data)
+
+    
+
