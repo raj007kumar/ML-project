@@ -6,6 +6,8 @@ from src.logger import logging
 
 from src.components.data_transformation import datatransformation
 from src.components.data_transformation import data_transformationconfig
+from src.components.model_trainer import model_trainer_config
+from src.components.model_trainer import model_trainer
 
 
 import pandas as pd
@@ -56,6 +58,10 @@ if __name__ == "__main__":
     data_transformation = datatransformation(config_transformation)  # Fix: Pass the correct config
 
     train_arr, test_arr, _ = data_transformation.initiate_data_transformation(train_data, test_data)
+    
+    
+    model_trainer = model_trainer()
+    model_trainer.initiate_model_trainer(train_arr, test_arr)
 
     
 
